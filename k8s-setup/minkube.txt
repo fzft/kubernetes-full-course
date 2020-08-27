@@ -1,0 +1,46 @@
+
+
+ echo 1 > /proc/sys/net/bridge/bridge-nf-call-iptables
+ echo 1 > /proc/sys/net/bridge/bridge-nf-call-ip6tables
+
+minikube stop; minikube delete; sudo rm -rf ~/.minikube; sudo rm -rf ~/.kub
+
+systemctl start docker
+
+minikube start --vm-driver=none --registry-mirror=https://registry.docker-cn.com --image-mirror-country=cn --image-repository=registry.cn-hangzhou.aliyuncs.com/google_containers
+
+minikube start --vm-driver=none  --image-repository=registry.cn-hangzhou.aliyuncs.com/google_containers --extra-config=kubelet.cgroup-driver=systemd
+
+kubectl get pods --all-namespaces
+
+minikube addons enable ingress
+
+minikube service kubernetes-dashboard --namespace kubernetes-dashboard
+
+# remote interviews
+kubectl patch svc kubernetes-dashboard -p '{"spec":{"type":"NodePort"}}' -n kubernetes-dashboard
+
+
+kubectl delete --all pods --namespace=default
+kubectl delete service nginx
+kubectl delete deployment nginx
+
+
+# delete all pods
+kubectl delete --all pods --namespace=default
+
+
+# deete all deployments
+ kubectl delete --all deployments --namespace=default
+ 
+ # delete all services
+ kubectl delete --all services --namespace=default
+
+kubectl delete -n default persistentvolumeclaim registry-claim
+
+kubectl port-forward svc/postgres 5432:5432
+
+
+
+## Jenkins url
+http://192.168.3.132:30709/
