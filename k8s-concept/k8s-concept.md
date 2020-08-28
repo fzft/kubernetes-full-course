@@ -1,0 +1,24 @@
+- POD
+    - containers(docker) are encapsulated into kubernetes object known as pods
+    - a pod is a single instance of an application
+    - smallest object in kubernetes
+    - scale up instance
+        - if you need to add additional instances, create a new pod altogether with a new instance of the same application
+        - if current node has no sufficient capacity, you can always deploy additional pods on a new node in the cluster
+    - pods usually have a one to one relationship with containers 
+    - multiple container in a pod
+        - a single pod can have multiple containers , except for the fact that they're usually not multiple containers of the same kind
+        - sometimes you might have a scenario where you have a helper container that might be doing some support task for our application, you can have both of these containers part of the same pod
+        - the two containers also communicate with each other directly by referring to each other as localhost, since they share some network space, the same storage space as well
+    - kubectl
+        - deploy
+            - kubectl run nginx --image nginx
+            - life
+                - create a pod automatically
+                - deploy an instance of nginx docker image 
+        - list
+            - kubectl get pods
+            - kubectl get pods -o wide
+                - where the pod running 
+        - description
+            - kubectl describe pod nginx
