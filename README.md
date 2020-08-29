@@ -9,6 +9,7 @@
     - kubernetes concept - PODs, ReplicaSets, Deployments
     - kubernetes networking
     - kubernetes service
+    - kubernetes microservice
 - Certified Kubernetes Administrator (CKA)
 - Certified Kubernetes Application Developer (CKAD)
 
