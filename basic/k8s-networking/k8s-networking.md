@@ -3,7 +3,7 @@
     - when kubernetes initially configured, create an internal private network with the address
     eg: 10.244.0.2, all the pods are attached to it, when deploy multiple pods, they will get a separate IP
     assigned from this network, the pods can communicate to each other through these IP,
-    ![image info](./k8s-networking.jpg)
+    ![image info](k8s-networking.jpg)
     - cluster Networking
         - kubernetes expects us to setup networking to meeting certain fundamental requirements
         - setup criterion
@@ -16,4 +16,4 @@
             - flannel
             - NSX T
             - Kaliko
-        ![image info](./k8s-cluster-networking.jpg)
+        ![image info](k8s-cluster-networking.jpg)

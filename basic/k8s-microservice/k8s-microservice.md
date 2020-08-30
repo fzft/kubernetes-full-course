@@ -13,6 +13,6 @@
         - Create Services (NodePort)
             - voting-app
             - result-app
-    ![image info](./microservice-architecture.jpg)
+    ![image info](microservice-architecture.jpg)
     - Deployment-Version
-    ![image info](./deployment-version-architecture.jpg)
+    ![image info](deployment-version-architecture.jpg)

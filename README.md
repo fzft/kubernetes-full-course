@@ -11,6 +11,8 @@
     - kubernetes service
     - kubernetes microservice
 - Certified Kubernetes Administrator (CKA)
+    - core-concept
+    - scheduling
 - Certified Kubernetes Application Developer (CKAD)
 
 

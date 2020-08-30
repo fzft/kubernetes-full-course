@@ -6,7 +6,7 @@
 - Architecture
     - overview 
     - cluster
-        - master ![image info](./master-worker.jpg)
+        - master ![image info](master-worker.jpg)
             - kube-apiserver
             - etcd
             - controller

@@ -1,0 +1,127 @@
+- ETCD
+    - a distributed reliable key-value store that is Simple, Secure and Fast
+    - stores information regarding the cluster as the nodes, pods, configs, secrets, accounts, roles, bindings
+    - every information you run kubectl get command is from the ETCD server
+    - every make to you cluster, such as additional nodes, deploying pods or replicasets sets are updated in the ETCD server
+    - install
+        - Download Binaries
+        - Extract
+        - Run ETCD Service
+            - ./etcd
+    - deployment type
+        - scratch
+        - kubeadm tool
+        
+- Kube API Server
+    - primary management component in kubernetes 
+    - response
+        - authenticating
+        - validating request
+        - retrieve data (only component that interacts directly with etct datastore)
+        - update ETCD
+        - scheduler
+        - kubelet
+    - you run a kubectl command , the kubectl utility is infact reaching to the kubeapiserver
+        - authenticates the request and validate it 
+        - retrieve the data from the ETCD cluster 
+            - the scheduler identifies the right node to place the new POD on and communicated that back to kube-apiserver
+            - apiserver updates the information in the ETCD cluster 
+            - apiserver then passes that information to the kubelet in appropriate worker node
+            - the kubelet creates the POD on the node and instructs the container runtime engine to deploy the application image
+            - once done, the kubelet updates the status back to the API server 
+            - apiserver then updates the data back in the ETCD cluster 
+        - response back with the requested information
+        - the scheduler continuously monitors the API server and realizes that there is a new pod with no node assigned
+    - kubeapiserver is the center of all the different tasks 
+    - you could also invoke the API directly by sending a post request like 
+        - eg: kubectl get pods 
+        - curl -X POST /api/v1/namespace/default/pods/...
+        
+- Kube Controller Manager
+    - manage various controllers in kubernetes
+    - response
+        - watch status
+            - a process that continuously monitors the state of various components within the system
+            - eg: Node-Controller
+                - monitor the health of the nodes, check the status of the nodes every 5 seconds through apiserver (heartbeat)
+                - if it stops receiving heartbeat from node, the node is marked as un reachable, but it watis for 40 seconds before marking it unreachable, 
+                - it gives it 5 mins to come back up 
+                - if it doesn't, it removes the PODs assigned to that node and provisions them on the healthy ones
+      
+        - remediate situation
+        
+- Kube Scheduler
+    - response
+        - scheduling pods and nodes
+            - deciding which pod goes on which node
+            - on certain criterion 
+
+- Kubelet
+    - response 
+        - doing all the paperwork necessary to become part of the cluster
+        - the kubelet in the kubernetes worker node, register the node with the kubernetes cluster
+        - receive instructions to load a container  or a POD on the node, it requests the container run time 
+        - eg: docker, to pull the required image and run an instance
+        - monitor the state of the POD and the containers in it and report to the kube apiserver on a timely basis
+
+- Kube Proxy
+    - a process that runs on each node in the kubernetes cluster
+    - response
+        - look for new services and every time a new service is created, it create the appropriate rules on each node to forward traffic to these 
+        services to the backend pods
+    - rules
+        - IPTABLES rules
+            - creates an IP tables rule on each node in the cluster to forward traffic heading to the IP of the service
+ 
+- Namespaces
+    - response
+        - isolation
+            - default namespace, automatically, when the cluster is first set up kubernetes, creates a set of pods and services for its internal purpose
+            - kube system namespace 
+            - kube-public
+            - resources should be made available to all users are created 
+        - resource limit
+            - Resource Quota
+                - create file, kind ResourceQuota 
+        - DNS
+    - create Namespace
+        - kind Namespace
+        - kubectl create namespace xxx
+    - switch Namespace
+        - kubectl config set-context $(kubectl config current-context) --namespace=xxx
+
+- Imperative and Declarative
+    - imperative
+        - what to do and how to do
+        - commands
+            - create objects
+                - kubectl run 
+                - kubectl create
+                - kubectl expose
+            - update objects
+                - kubectl edit
+                - kubectl scale
+                - kubectl set
+                - kubectl replace (make record)
+    - declarative
+        - will not give step by step instructions
+        - command
+            - create objects
+                - kubectl apply
+                - kubectl apply -f /path/to/config-file
+            - update objects
+                - kubectl apply
+                
+                
+- kubectl Apply
+    - run command if the object doesn't exist, object is created
+    - when the object is created 
+    - when update, compare to identified are to be made to live object,
+    and live object make change, as well as the last applied configuration
+    - local file
+    - kubernetes (Live object configuration)
+        - file configuration of object on the kubernetes
+    - last applied configuration 
+        - store in live object, under annotations
+        - yaml file convert to json format, stored last applied configuration
+        - help find what field remove from local file
