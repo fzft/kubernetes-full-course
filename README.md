@@ -13,6 +13,7 @@
 - Certified Kubernetes Administrator (CKA)
     - core-concept
     - scheduling
+    - logging and monitoring
 - Certified Kubernetes Application Developer (CKAD)
 
 
