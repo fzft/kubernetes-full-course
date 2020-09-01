@@ -14,6 +14,9 @@
     - core-concept
     - scheduling
     - logging and monitoring
+    - application-lifecycle-management
+    - cluster maintenance
+    - security
 - Certified Kubernetes Application Developer (CKAD)
 
 
