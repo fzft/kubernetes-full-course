@@ -17,6 +17,7 @@
     - application-lifecycle-management
     - cluster maintenance
     - security
+    - network
 - Certified Kubernetes Application Developer (CKAD)
 
 
