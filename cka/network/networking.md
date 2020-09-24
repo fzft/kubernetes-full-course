@@ -25,3 +25,35 @@
                 - cat /proc/sys/net/ipv4/ip_forward  (0-> no forward 1-> forward)
                 - /etc/sysctl.conf
                     - net.ipv4.ip_forward=1
+- prerequsite DNS
+    - name resolution 
+    - entries into single server who manage it centrally -> DNS server
+        - instead host file
+        - cat /etc/ resolv.conf
+            - nameserver 192.168.1.100
+        - first look in the local /etc/hosts then looks at the name server
+            - order is defined by an entry in the file /etc/nsswitch.conf
+        - cat >> /etc/resolv.conf nameserver 8.8.8.8 well known public name server
+    - apps.google.com
+        - org-DNS -> Root-DNS -> .com-DNS -> Google.DNS
+        
+- prerequsite Network Namespace
+- Container Networking Interface
+- Pod Networking
+    - Networking Model
+        - Every POD should have an IP Address
+        - every POD should be able to communicate with every other POD in the same node
+        - every POD should be able to communicate with every other POD on the nodes without NAT
+
+- Ingress
+    - Ingress controller
+        - nginx-ingress-controller
+        ![image info](nginx-ingress-controller.jpg)
+        ![image info](nginx-ingress-controller-configMap.jpg)
+        - components
+            - service to expose
+            - a configMap to feed NGINX configuration data
+            - a service account with right permission to access all of these objects
+    - Ingress resources
+        - a set of rules and configurations applied on the ingress controller
+            - route traffic to different applications based on the URl

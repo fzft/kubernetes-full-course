@@ -18,6 +18,7 @@
     - cluster maintenance
     - security
     - network
+    - install
 - Certified Kubernetes Application Developer (CKAD)
 
 

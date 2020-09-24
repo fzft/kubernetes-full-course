@@ -1,0 +1,64 @@
+- Designing a kubernetes cluster
+    - ask
+        - purpose
+            - education
+                - minikube 
+                - single node cluster with kubeadm/GCP/AWS
+            - development & testing
+                - muti-node cluster with single master and multiple worker
+                - Setup using kubeadm tool or quick provision on GCP or AWS 
+            - hosting production applications
+                - high availability multi node cluster with multiple nodes
+                - kubeadm or GCP 
+                - Upto 5000 nodes
+                - Upto 150,000 PODS in the cluster
+                - Upto 300,000 Total containers
+                - Upto 100 PODs per node
+        - cloud or onPerm
+        - workloads
+            - how many ?
+            - what kind
+                - web
+                - big data/analytics
+            - application resource requirements
+                - cpu intensive
+                - memory intensive
+            - traffic
+                - heavy traffic
+                - burst traffic
+            - storage
+                - high performance - SSD backed storage
+                - multiple concurrent connections - Network based storage
+                - Persistent shared volumes for shared access across multiple PODs
+                - Label nodes with specific disk types
+                - use Node selectors to assign applications to nodes with specific disk types
+            - nodes
+                - virtual or physical machines
+                - minimum of 4 node cluster (size based on workload)
+                - master vs worker nodes
+                - linux x86_64 architecture
+                - master nodes can host workloads
+                    - best practice is not host workloads on master nodes
+                - in large cluster you may choose to separate the ETCD cluster from the master the nodes to its own cluster nodes
+
+- kubernetes infrastructures
+    - turnkey solutions
+        - openshift
+        - cloud foundry container runtime
+        - vagrant
+    - hosted solutions
+    - our design
+        - 1 master , 2 nodes
+- ETCD 
+    - distributed
+    - consistent
+        - raft
+            - majority = quorum = N /2 + 1
+            - Fault tolerance
+            - recommend to select an odd number
+        - read
+        - write
+            - only one of the instance is responsible for processing the writes, internally 
+    - etcdctl
+        - export ETCDCTL_API=3
+        
